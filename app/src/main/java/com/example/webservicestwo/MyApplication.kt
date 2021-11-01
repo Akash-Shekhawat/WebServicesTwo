@@ -1,11 +1,11 @@
 package com.example.webservicestwo
 
 
-import android.annotation.SuppressLint
+
 import android.app.Application
 import android.content.Context
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.net.ConnectivityManager
+
 
 class MyApplication: Application() {
     companion object{

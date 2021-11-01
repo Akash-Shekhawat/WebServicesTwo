@@ -19,17 +19,13 @@ object APIClient {
     private const val HEADER_PRAGMA = "Pragma"
     private const val cacheSize = (5 * 1024 * 1024).toLong()
 
-    /**
-     * return client
-     */
+  
     val getClient: ApiInterface
         get() {
             return retrofit().create(ApiInterface::class.java)
         }
 
-    /**
-     * prepare and return retrofit
-     */
+
     private fun retrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -38,9 +34,7 @@ object APIClient {
             .build()
     }
 
-    /**
-     * prepare and return okHttpClient
-     */
+
     private fun okHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .cache(cache())
@@ -50,17 +44,12 @@ object APIClient {
             .build()
     }
 
-    /**
-     * prepare and return cache
-     */
+
     private fun cache(): Cache {
         return Cache(File(MyApplication.getInstance()?.cacheDir, "someIdentifier"), cacheSize)
     }
 
-    /**
-     * This interceptor will be called both if the network is available and if the network is not available
-     * @return offlineInterceptor
-     */
+
     private fun offlineInterceptor(): Interceptor {
         return Interceptor { chain ->
             var request = chain.request()
@@ -81,10 +70,7 @@ object APIClient {
         }
     }
 
-    /**
-     * This interceptor will be called ONLY if the network is available
-     * @return networkInterceptor
-     */
+
     private fun networkInterceptor(): Interceptor {
         return Interceptor { chain ->
             val response = chain.proceed(chain.request())
@@ -101,9 +87,7 @@ object APIClient {
         }
     }
 
-    /**
-     * httpLoggingInterceptor instance
-     */
+
     private fun httpLoggingInterceptor(): HttpLoggingInterceptor {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY

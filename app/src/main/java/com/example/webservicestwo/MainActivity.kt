@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     private fun getMyData(id:Int) {
 
 
-        val retrofitData = APIClient.getClient.getData(id)
+        val retrofitData = APIClient.getClient.getData()
         //Ctrl+shift+space to get the callbacks
         retrofitData.enqueue(object : Callback<List<DataModel>?> {
             override fun onResponse(
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                 progressDialog.dismiss()
                 Log.i("MainActivity", "Data is ${response.body()}")
                 for (data in response.body()!!) {
-                    //println("Data is ${data.postID}, ${data.postTitle}, ${data.postBody}")
+
                     tvId.text = "Post Id: ${data.id.toString()}"
                     tvTitle.text = "Title: ${data.title}"
                     tvBody.text = "Body: ${data.body}"
